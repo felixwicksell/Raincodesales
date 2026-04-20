@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Raincode · Var vill ni börja?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* B2B Service palette — UI/UX Pro Max skill */
+    --ink:#0F172A;
+    --ink-2:#334155;
+    --muted:#64748B;
+    --muted-2:#94A3B8;
+    --line:#E2E8F0;
+    --bg:#F8FAFC;
+    --panel:#FFFFFF;
+    --panel-2:#F1F5F9;
+    --accent:#4075C1;
+    --accent-light:#EBF3FC;
+    --accent-mid:#6E9DD4;
+    --accent-ink:#FFFFFF;
+    --ok:#059669;
+    --ok-bg:#ECFDF5;
+    --radius-card:18px;
+    --radius-sm:10px;
+    --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.06);
+    --shadow-hover:0 8px 32px rgba(64,117,193,.14),0 2px 8px rgba(15,23,42,.06);
+    --transition:all .18s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);
+    font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;font-size:16px;line-height:1.55}
+  a{color:inherit;text-decoration:none}
+  /* ── Layout ── */
+  .wrap{max-width:1260px;margin:0 auto;padding:28px 40px 72px}
+  /* ── Top bar ── */
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:56px}
+  .logo{display:flex;align-items:center;color:var(--ink)}
+  .logo svg{height:22px;width:auto;display:block}
+  .langtoggle{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);
+    border-radius:999px;overflow:hidden;font-size:12px;font-weight:700;letter-spacing:.04em}
+  .langtoggle button{background:transparent;border:0;padding:7px 14px;cursor:pointer;
+    color:var(--muted);text-transform:uppercase}
+  .langtoggle button.active{background:var(--accent);color:#fff}
+  /* ── Hero ── */
+  .hero{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:end;
+    padding-bottom:44px;border-bottom:1px solid var(--line);margin-bottom:0}
+  .eyebrow{font-size:12px;letter-spacing:.01em;
+    color:var(--accent);font-weight:600;margin-bottom:20px;display:flex;
+    align-items:center;gap:8px}
+  .eyebrow::before{content:'/';color:var(--accent-mid);font-weight:400;font-size:14px}
+  h1{font-family:'Poppins',sans-serif;font-size:clamp(34px,3.6vw,50px);line-height:1.08;
+    letter-spacing:-0.02em;font-weight:700;color:var(--ink)}
+  h1 mark{background:none;color:var(--accent);padding:0;
+    border-radius:0;font-style:normal;font-weight:700}
+  .hero-right p{font-size:17px;color:var(--ink-2);line-height:1.6;margin-bottom:16px}
+  .hero-right .sub{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:0}
+  /* ── Credibility strip ── */
+  .cred{display:flex;align-items:center;flex-wrap:wrap;gap:0;
+    padding:20px 0;border-bottom:1px solid var(--line);margin-bottom:52px}
+  .cred-item{font-size:13px;font-weight:500;color:var(--muted);
+    padding:0 28px;position:relative;line-height:1.4}
+  .cred-item:first-child{padding-left:0}
+  .cred-item:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;
+    transform:translateY(-50%);width:1px;height:16px;background:var(--line)}
+  .cred-item strong{color:var(--ink);font-family:'Poppins',sans-serif;font-weight:800;
+    font-size:14.5px}
+  /* ── Section label ── */
+  .section-label{font-size:11.5px;letter-spacing:.01em;
+    color:var(--muted);font-weight:500;margin:0 0 20px;display:flex;
+    align-items:center;gap:6px}
+  .section-label::before{content:'/';color:var(--muted-2);font-weight:400}
+  /* ── Pathways ── */
+  .pathways{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-bottom:60px}
+  .pw{background:var(--panel);border:1.5px solid var(--line);border-radius:var(--radius-card);
+    padding:28px;cursor:pointer;transition:var(--transition);
+    display:flex;flex-direction:column;gap:16px;text-align:left;width:100%;
+    box-shadow:var(--shadow-card)}
+  .pw:hover{border-color:var(--accent);box-shadow:var(--shadow-hover);transform:translateY(-3px)}
+  .pw:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-color:var(--accent)}
+  .pw-num{font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--muted-2)}
+  .pw h3{font-family:'Poppins',sans-serif;font-size:17px;font-weight:600;
+    letter-spacing:-0.01em;color:var(--ink);line-height:1.25}
+  .pw .promise{color:var(--ink-2);font-size:13.5px;line-height:1.55}
+  /* fits-when */
+  .pw .fits-when{background:var(--ok-bg);border-left:3px solid var(--ok);
+    border-radius:0 7px 7px 0;padding:9px 12px;font-size:12px;
+    color:var(--ink-2);line-height:1.55}
+  .pw .fits-when strong{display:block;font-size:10px;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--ok);font-weight:800;margin-bottom:4px}
+  /* meta row */
+  .pw .meta{display:flex;justify-content:space-between;align-items:baseline;
+    font-size:11.5px;color:var(--muted);padding-top:12px;
+    border-top:1px solid var(--line);margin-top:auto;flex-wrap:wrap;gap:4px}
+  .pw .meta .price{font-size:14px;font-weight:800;color:var(--ink)}
+  .pw .meta .price-sub{font-size:10.5px;color:var(--muted);font-weight:400}
+  /* expand */
+  .pw .expand-hint{display:flex;align-items:center;gap:5px;font-size:11.5px;
+    color:var(--accent);font-weight:700;letter-spacing:.02em}
+  .arrow{display:inline-block;transition:transform .2s ease;font-size:10px}
+  .pw[aria-expanded="true"] .expand-hint .arrow{transform:rotate(180deg)}
+  /* detail */
+  .pw .detail{display:none;font-size:12.5px;color:var(--ink-2);
+    border-top:1px dashed var(--line);padding-top:14px;line-height:1.55}
+  .pw[aria-expanded="true"] .detail{display:block}
+  .pw .detail h4{margin:10px 0 5px;font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);font-weight:800}
+  .pw .detail h4:first-child{margin-top:0}
+  .pw .detail ul{padding-left:16px;margin:0 0 6px}
+  .pw .detail li{margin-bottom:5px}
+  .pw .detail .upgrade-box{background:var(--accent-light);border-radius:8px;
+    padding:10px 12px;font-size:12px;color:var(--accent);margin-top:10px;
+    line-height:1.5}
+  .pw .detail .upgrade-box strong{color:var(--ink);font-weight:800}
+  .pw .detail .agents-link{display:inline-flex;align-items:center;gap:5px;
+    color:var(--accent);font-weight:700;font-size:12px;margin-top:8px;
+    text-decoration:none}
+  .pw .detail .agents-link:hover{text-decoration:underline}
+  /* ── Proof ── */
+  .proof-wrap{margin-bottom:60px}
+  .proof{display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:start;
+    background:var(--panel);border:1.5px solid var(--line);border-radius:var(--radius-card);
+    padding:44px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+  .proof .num{font-family:'Poppins',sans-serif;font-size:clamp(48px,5vw,68px);
+    font-weight:900;letter-spacing:-0.05em;line-height:1;color:var(--ink)}
+  .proof .num small{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);margin-top:10px}
+  .proof p{font-size:15px;color:var(--ink-2);line-height:1.65}
+  .proof p strong{color:var(--ink)}
+  .proof-cred{background:var(--ink);color:#fff;border-radius:var(--radius-card);
+    padding:24px 36px;display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:20px}
+  .proof-cred .stat{text-align:center}
+  .proof-cred .stat .n{font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;
+    letter-spacing:-0.03em;color:var(--accent-mid)}
+  .proof-cred .stat .l{font-size:11px;color:#94A3B8;letter-spacing:.06em;
+    text-transform:uppercase;margin-top:3px;font-weight:500}
+  .proof-cred .sep{width:1px;height:40px;background:rgba(255,255,255,.12)}
+  .proof-ref{display:flex;align-items:center;gap:10px;padding:14px 0 0;
+    font-size:12.5px;color:var(--muted)}
+  .proof-ref a{color:var(--accent);font-weight:700;text-decoration:none}
+  .proof-ref a:hover{text-decoration:underline}
+  /* ── Phases ── */
+  .phases{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:60px}
+  .phase{background:var(--panel);border:1.5px solid var(--line);border-radius:var(--radius-sm);
+    padding:22px;position:relative;box-shadow:var(--shadow-card);
+    transition:var(--transition)}
+  .phase:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(64,117,193,.1)}
+  .phase .n{font-size:10px;font-weight:800;letter-spacing:.2em;color:var(--accent);
+    text-transform:uppercase;margin-bottom:8px}
+  .phase .name{font-weight:800;font-size:13.5px;color:var(--ink);margin-bottom:6px;
+    letter-spacing:-0.01em}
+  .phase .desc{font-size:12px;color:var(--muted);line-height:1.5}
+  .phase-arrow{display:none}
+  /* ── CTA ── */
+  .cta{display:flex;align-items:center;justify-content:space-between;gap:28px;
+    background:var(--ink);color:#fff;border-radius:var(--radius-card);padding:44px 48px;
+    position:relative;overflow:hidden}
+  .cta::before{content:'';position:absolute;top:-80px;right:-80px;
+    width:280px;height:280px;border-radius:50%;
+    background:rgba(64,117,193,.15);pointer-events:none}
+  .cta::after{content:'';position:absolute;bottom:-60px;right:160px;
+    width:160px;height:160px;border-radius:50%;
+    background:rgba(64,117,193,.08);pointer-events:none}
+  .cta h2{font-family:'Poppins',sans-serif;font-size:clamp(20px,2.2vw,28px);
+    font-weight:700;letter-spacing:-0.02em;max-width:540px;line-height:1.3;position:relative}
+  .cta-btn{background:#fff;color:var(--ink);border:0;border-radius:999px;
+    padding:16px 30px;font-size:14.5px;font-weight:800;letter-spacing:.02em;
+    cursor:pointer;text-decoration:none;white-space:nowrap;display:inline-block;
+    position:relative;transition:background .15s,color .15s}
+  .cta-btn:hover{background:#E8EEFF;color:var(--accent)}
+  .cta .contact{display:block;font-size:11.5px;color:#A9B0C0;margin-top:10px}
+  /* ── Footer ── */
+  footer{margin-top:52px;padding-top:24px;border-top:1px solid var(--line);
+    font-size:11.5px;color:var(--muted);display:flex;
+    justify-content:space-between;align-items:center}
+  /* ── Bilingual ── */
+  [data-en],[data-sv]{display:none}
+  /* ── Responsive ── */
+  @media(max-width:1060px){
+    .pathways{grid-template-columns:repeat(3,1fr)}
+    .cost-stats{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:760px){
+    .hero{grid-template-columns:1fr;gap:28px}
+    h1{font-size:38px}
+    .pathways{grid-template-columns:1fr}
+    .phases{grid-template-columns:repeat(2,1fr)}
+    .proof{grid-template-columns:1fr;padding:28px}
+    .proof-cred{flex-direction:column;align-items:flex-start;gap:20px}
+    .proof-cred .sep{display:none}
+    .cta{flex-direction:column;align-items:flex-start;padding:32px}
+    .wrap{padding:24px 20px 52px}
+    .cred{gap:12px}
+    .cred-item{padding:0;width:100%}
+    .cred-item::after{display:none}
+  }
+  /* ── Intro section ── */
+  .intro-section{margin-bottom:60px}
+  .intro-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:start}
+  .intro-headline{font-family:'Poppins',sans-serif;font-size:clamp(21px,2.2vw,30px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.25;margin-bottom:20px}
+  .intro-headline mark{background:none;color:var(--accent);font-style:normal}
+  .intro-story p{font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:16px}
+  .intro-story p:last-child{margin-bottom:0}
+  .intro-story em{font-style:italic;color:var(--ink);font-weight:500}
+  .intro-role-inner{background:var(--panel);border:1.5px solid var(--line);border-radius:var(--radius-card);padding:28px 30px;box-shadow:var(--shadow-card)}
+  .intro-role-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:800;color:var(--accent);margin-bottom:12px}
+  .intro-role-inner > p{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin-bottom:20px}
+  .intro-pillars{display:flex;flex-direction:column;gap:12px}
+  .intro-pillar{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink-2);line-height:1.5}
+  .intro-pillar strong{color:var(--ink)}
+  .intro-pillar-num{width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  /* ── AI Types ── */
+  .ai-types-section{margin-bottom:60px}
+  .ai-types-intro{font-size:15px;color:var(--ink-2);line-height:1.68;margin-bottom:28px;max-width:780px}
+  .ai-types-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  .at-card{background:var(--panel);border:1.5px solid var(--line);border-radius:var(--radius-card);padding:28px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:18px}
+  .at-op{border-top:3px solid var(--accent)}
+  .at-inn{border-top:3px solid #0D9488}
+  .at-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:800}
+  .at-op .at-label{color:var(--accent)}
+  .at-inn .at-label{color:#0D9488}
+  .at-name{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;line-height:1.2;margin:5px 0 8px}
+  .at-name em{font-style:italic}
+  .at-op .at-name em{color:var(--accent)}
+  .at-inn .at-name em{color:#0D9488}
+  .at-tagline{font-size:11px;font-weight:600;padding:4px 11px;border-radius:999px;display:inline-block;letter-spacing:.01em}
+  .at-op .at-tagline{background:var(--accent-light);color:var(--accent)}
+  .at-inn .at-tagline{background:#F0FDFA;color:#0D9488}
+  .at-desc{font-size:13.5px;color:var(--muted);line-height:1.62}
+  .at-study-note{font-size:12px;color:var(--muted);background:var(--panel-2);border-radius:8px;padding:10px 14px;line-height:1.55;border-left:3px solid var(--accent-mid)}
+  /* Operational AI diagram */
+  .op-diagram{display:grid;grid-template-columns:1fr 148px 1fr;gap:10px;align-items:center}
+  .op-areas-col{display:flex;flex-direction:column;gap:8px}
+  .op-area-item{padding:10px 12px;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+  .op-area-title{font-size:8.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:3px}
+  .op-area-text{font-size:11px;color:var(--muted);line-height:1.4}
+  .op-center-col{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .op-top-area,.op-bot-area{text-align:center;padding:9px 10px;background:var(--bg);border:1px solid var(--line);border-radius:8px;width:100%}
+  .op-circle{width:108px;height:108px;border-radius:50%;border:2px solid var(--accent);background:var(--accent-light);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+  .op-circle-label{font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent-mid);line-height:1.3;text-align:center}
+  .op-circle-word{font-family:'Poppins',sans-serif;font-size:22px;font-weight:900;color:var(--accent);letter-spacing:-0.03em;line-height:1}
+  /* Innovation AI diagram */
+  .inn-diagram{display:flex;align-items:center;gap:10px}
+  .inn-items{flex:1;display:flex;flex-direction:column;gap:8px}
+  .inn-item{padding:10px 12px;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+  .inn-right .inn-item{border-left:3px solid #0D9488}
+  .inn-item-title{font-size:8.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:3px}
+  .inn-item-text{font-size:11px;color:var(--muted);line-height:1.4}
+  .inn-center-col{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;padding:0 4px}
+  .inn-arrow{font-size:20px;color:#0D9488;line-height:1}
+  .inn-circle{width:54px;height:54px;border-radius:50%;border:2px solid #0D9488;background:#F0FDFA;display:flex;align-items:center;justify-content:center}
+  .inn-circle-word{font-family:'Poppins',sans-serif;font-size:13px;font-weight:900;color:#0D9488}
+  @media(max-width:1060px){
+    .ai-types-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:900px){
+    .intro-grid{grid-template-columns:1fr}
+    .op-diagram{grid-template-columns:1fr;gap:8px}
+    .op-areas-col{flex-direction:row;flex-wrap:wrap}
+    .op-area-item{flex:1;min-width:130px}
+    .op-center-col{order:-1}
+    .inn-diagram{flex-direction:column;gap:8px}
+    .inn-center-col{flex-direction:row}
+  }
+  /* ── Positioning section ── */
+  .position-section{margin-bottom:60px}
+  .position-intro{margin-bottom:28px}
+  .position-headline{font-family:'Poppins',sans-serif;font-size:clamp(19px,2vw,26px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.3;margin-bottom:10px}
+  .position-sub{font-size:15px;color:var(--ink-2);line-height:1.65;max-width:700px}
+  .pos-grid{display:grid;grid-template-columns:1fr 48px 1fr;gap:0;align-items:stretch;margin-bottom:16px}
+  .pos-card{border-radius:var(--radius-card);padding:32px 34px;display:flex;flex-direction:column;gap:18px}
+  .pos-llm{background:var(--panel);border:1.5px solid var(--line);box-shadow:var(--shadow-card)}
+  .pos-agent{background:var(--ink);color:#fff;box-shadow:0 8px 32px rgba(15,23,42,.18)}
+  .pos-vs{display:flex;align-items:center;justify-content:center;padding:0 4px}
+  .pos-vs-inner{width:36px;height:36px;border-radius:50%;background:var(--panel-2);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--muted);flex-shrink:0}
+  .pos-tag{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:5px 11px;border-radius:999px;display:inline-block;width:fit-content}
+  .pos-llm .pos-tag{background:var(--panel-2);color:var(--muted);border:1px solid var(--line)}
+  .pos-agent .pos-tag{background:rgba(110,157,212,.18);color:#6E9DD4;border:1px solid rgba(110,157,212,.25)}
+  .pos-name{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.01em;line-height:1.2}
+  .pos-llm .pos-name{color:var(--ink-2)}
+  .pos-agent .pos-name{color:#fff}
+  .pos-flow{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:12.5px;font-weight:600;padding:12px 14px;border-radius:8px}
+  .pos-llm .pos-flow{background:var(--panel-2);color:var(--ink-2)}
+  .pos-agent .pos-flow{background:rgba(255,255,255,.08);color:#CBD5E1}
+  .pos-flow-arr{color:var(--muted-2);font-weight:400}
+  .pos-agent .pos-flow-arr{color:rgba(255,255,255,.3)}
+  .pos-items{display:flex;flex-direction:column;gap:7px;flex:1}
+  .pos-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;line-height:1.45}
+  .pos-llm .pos-item{color:var(--muted)}
+  .pos-agent .pos-item{color:#94A3B8}
+  .pos-item-dot{width:5px;height:5px;border-radius:50%;margin-top:5px;flex-shrink:0}
+  .pos-llm .pos-item-dot{background:var(--muted-2)}
+  .pos-agent .pos-item-dot{background:#6E9DD4}
+  .pos-result{font-size:13px;font-weight:700;padding:10px 14px;border-radius:8px;margin-top:auto}
+  .pos-llm .pos-result{background:var(--panel-2);color:var(--ink-2);border:1px solid var(--line)}
+  .pos-agent .pos-result{background:rgba(64,117,193,.25);color:#93C5FD;border:1px solid rgba(64,117,193,.3)}
+  .pos-example{background:var(--accent-light);border:1.5px solid rgba(64,117,193,.2);border-radius:var(--radius-card);padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+  .pos-ex-icon{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .pos-ex-icon svg{width:16px;height:16px;fill:#fff}
+  .pos-ex-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--accent);margin-bottom:6px}
+  .pos-ex-text{font-size:14px;color:var(--ink-2);line-height:1.65}
+  .pos-ex-text strong{color:var(--ink)}
+  /* ── Transformation dimensions ── */
+  .dim-intro-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:32px 0 16px;flex-wrap:wrap}
+  .dim-intro-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+  .dim-intro-line{flex:1;height:1px;background:var(--line);min-width:40px}
+  .dim-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .dim-card{background:var(--panel);border:1.5px solid var(--line);border-radius:12px;padding:20px 18px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:14px}
+  .dim-title{font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .dim-block{display:flex;flex-direction:column;gap:3px}
+  .dim-source{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+  .dim-source-llm{color:var(--muted-2)}
+  .dim-source-rc{color:var(--accent)}
+  .dim-text{font-size:12.5px;line-height:1.45}
+  .dim-text-llm{color:var(--muted)}
+  .dim-text-rc{color:var(--ink-2);font-weight:500}
+  .dim-divider{height:1px;background:var(--line)}
+  .pos-closer{background:var(--ink);color:#fff;border-radius:var(--radius-card);padding:24px 32px;margin-top:16px;display:flex;align-items:center;gap:20px}
+  .pos-closer-text{font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;line-height:1.5;color:#E2E8F0;letter-spacing:-0.01em;flex:1}
+  .pos-closer-text mark{background:none;color:#6E9DD4;font-style:normal}
+  @media(max-width:1060px){.dim-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:900px){
+    .pos-grid{grid-template-columns:1fr;gap:10px}
+    .pos-vs{flex-direction:row;padding:4px 0}
+    .pos-vs-inner{width:auto;height:28px;border-radius:999px;padding:0 14px;font-size:10px}
+  }
+  /* ── Quiz ── */
+  .quiz-wrap{background:var(--panel);border:1.5px solid var(--line);border-radius:var(--radius-card);padding:36px 44px;margin-bottom:60px;box-shadow:var(--shadow-card)}
+  .quiz-header{margin-bottom:22px}
+  .quiz-title{font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;margin-bottom:4px}
+  .quiz-sub{font-size:13px;color:var(--muted)}
+  .quiz-body .quiz-step{display:none;animation:fadeSlide .22s ease}
+  .quiz-body .quiz-step.active{display:block}
+  .quiz-q{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:14px;font-family:'Poppins',sans-serif;line-height:1.4}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .quiz-opt{background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:12px 18px;cursor:pointer;font-size:13.5px;color:var(--ink-2);text-align:left;transition:var(--transition);font-family:inherit;width:100%}
+  .quiz-opt:hover{border-color:var(--accent);background:var(--accent-light);color:var(--ink)}
+  .quiz-result{display:none}
+  .quiz-result.active{display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap;animation:fadeSlide .22s ease}
+  .quiz-badge{background:var(--accent);color:#fff;border-radius:10px;padding:14px 20px;min-width:155px;text-align:center;flex-shrink:0}
+  .quiz-badge-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;opacity:.75;margin-bottom:5px}
+  .quiz-badge-name{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;line-height:1.2}
+  .quiz-explain{flex:1;min-width:200px}
+  .quiz-explain-why{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin-bottom:14px}
+  .quiz-explain-cta{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:700;color:var(--accent);cursor:pointer;background:none;border:none;padding:0;font-family:inherit}
+  .quiz-explain-cta:hover{text-decoration:underline}
+  .quiz-reset{font-size:11.5px;color:var(--muted);cursor:pointer;background:none;border:none;padding:0;font-family:inherit;margin-top:12px;display:block;text-decoration:underline}
+  @keyframes fadeSlide{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:translateX(0)}}
+  /* ── Mini cases ── */
+  .mini-cases{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
+  .mini-case{background:var(--panel-2);border:1.5px solid var(--line);border-radius:12px;padding:22px 24px;display:flex;gap:16px;align-items:flex-start}
+  .mini-n{font-family:'Poppins',sans-serif;font-size:22px;font-weight:900;color:var(--accent);letter-spacing:-0.04em;white-space:nowrap;line-height:1;min-width:58px;padding-top:2px}
+  .mini-body p{font-size:13px;color:var(--ink-2);line-height:1.55}
+  .mini-body strong{color:var(--ink)}
+  /* ── Cost of inaction ── */
+  .cost-wrap{margin-bottom:60px}
+  .cost-banner{background:linear-gradient(140deg,var(--ink) 0%,#1A2E4A 100%);border-radius:var(--radius-card);padding:48px 56px;color:#fff;position:relative;overflow:hidden}
+  .cost-banner::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(64,117,193,.12);pointer-events:none}
+  .cost-banner::after{content:'';position:absolute;bottom:-40px;left:180px;width:200px;height:200px;border-radius:50%;background:rgba(64,117,193,.06);pointer-events:none}
+  .cost-inner{position:relative}
+  .cost-headline{font-family:'Poppins',sans-serif;font-size:clamp(20px,2.2vw,28px);font-weight:700;letter-spacing:-0.02em;line-height:1.25;margin-bottom:14px;color:#F1F5F9}
+  .cost-headline mark{background:none;color:#6E9DD4;font-style:normal;font-weight:700}
+  .cost-body{font-size:15px;line-height:1.7;color:#94A3B8;max-width:660px;margin-bottom:32px}
+  .cost-body strong{color:#CBD5E1}
+  .cost-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+  .cost-stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px 22px}
+  .cost-stat .cn{font-family:'Poppins',sans-serif;font-size:clamp(22px,2.2vw,30px);font-weight:800;color:#6E9DD4;letter-spacing:-0.04em;line-height:1;margin-bottom:7px}
+  .cost-stat .cl{font-size:12.5px;color:#94A3B8;line-height:1.5}
+  .cost-nudge{background:rgba(64,117,193,.15);border:1px solid rgba(64,117,193,.3);border-radius:10px;padding:16px 22px;font-size:13.5px;color:#CBD5E1;line-height:1.65}
+  .cost-nudge strong{color:#fff}
+  /* ── Next steps ── */
+  .steps-wrap{margin-bottom:60px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .step{background:var(--panel);border:1.5px solid var(--line);border-radius:var(--radius-card);padding:28px;box-shadow:var(--shadow-card);position:relative;overflow:hidden;transition:var(--transition)}
+  .step:hover{border-color:var(--accent);box-shadow:var(--shadow-hover)}
+  .step-bg-n{position:absolute;top:-10px;right:6px;font-family:'Poppins',sans-serif;font-size:88px;font-weight:900;color:var(--accent-light);letter-spacing:-0.05em;line-height:1;pointer-events:none;user-select:none}
+  .step-num{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800;margin-bottom:12px;position:relative}
+  .step-name{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.25;position:relative}
+  .step-desc{font-size:13px;color:var(--muted);line-height:1.6;position:relative}
+  @media(max-width:760px){
+    .quiz-wrap{padding:24px}
+    .mini-cases{grid-template-columns:1fr}
+    .cost-banner{padding:32px 28px}
+    .cost-stats{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .quiz-result.active{flex-direction:column}
+    .dim-grid{grid-template-columns:1fr}
+    .pos-closer{flex-direction:column;gap:12px}
+  }
+  @media print{
+    body{background:#fff}
+    .pw .detail{display:block !important}
+    .langtoggle{display:none}
+    .cta::before{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ░ TOP BAR ░ -->
+  <div class="topbar">
+    <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="94" height="15" fill="none" aria-label="Raincode"><path fill="currentColor" d="m7.184.253 2.3 3.352V5.78L7.476 7.83l2.008 2.92v3.998H7.516V11.02L5.508 8.06H3.396l-1.45-.89v7.577H0V.253h7.184ZM1.947 6.28h4.596l.973-.973V3.919L6.21 2.033H1.947V6.28ZM20.637.253v14.494H18.69V8.266h-5.237v6.481h-1.925V3.793l3.435-3.54h5.674Zm-7.184 6.232h5.237V2.033h-3.024L13.45 4.29v2.195h.004ZM32.504.253v1.78h-3.75v10.934h3.75v1.78h-9.441v-1.78h3.749V2.033h-3.75V.253h9.442Zm11.362 0v14.494h-1.968V9.55l-4.95-7.393h-.602v12.588H34.4V.249h3.478l4.016 6.067V.249h1.968l.004.004Zm4.311 0h5.962l1.47 2.217-1.26 1.326-1.161-1.759h-4.265l-.559.602v9.235l.747 1.096h4.224l1.327-1.305.995 1.471-1.532 1.615h-5.962l-1.741-2.588V2.059L48.18.256l-.004-.003Zm11.03 0h5.984L66.89 2.84v10.104l-1.72 1.802h-5.983l-1.741-2.588V2.055L59.204.253h.003Zm.166 11.618.746 1.095h4.286l.537-.58V3.13l-.724-1.096h-4.286l-.559.58v9.258ZM68.998.253h6.604l2.858 4.264v8.428l-1.74 1.802h-7.722V.253Zm1.946 1.78v10.955h4.971l.58-.602V4.81l-1.863-2.776h-3.688ZM89.851.253v1.78h-6.957l-.537.58v3.645h4.783v1.78h-4.783v3.833l.724 1.095h6.77v1.781H82.13l-1.72-2.588V2.055L82.17.253h7.681Zm.472.31v-.31h1.478v.31h-.551V2.03h-.375V.563h-.552Zm1.723-.31h.469l.497 1.193h.022l.497-1.193H94V2.03h-.368V.873h-.014l-.465 1.146H92.9l-.465-1.15h-.015v1.16h-.371V.254h-.004Z"/></svg></div>
+    <div class="langtoggle" role="tablist" aria-label="Language">
+      <button type="button" data-lang="sv" role="tab">SV</button>
+      <button type="button" data-lang="en" role="tab">EN</button>
+    </div>
+  </div>
+
+  <!-- ░ HERO ░ -->
+  <section class="hero">
+    <div>
+      <div class="eyebrow">
+        <span data-sv>Er AI-transformationspartner</span>
+        <span data-en>Your AI transformation partner</span>
+      </div>
+      <h1 data-sv>Er AI-resa börjar <mark>där ni är.</mark></h1>
+      <h1 data-en>Your AI journey starts <mark>where you are.</mark></h1>
+    </div>
+    <div class="hero-right">
+      <p data-sv>Oavsett om ni har ett konkret projekt på bordet, fortfarande söker rätt ingång — eller behöver landa i en gemensam bild innan ni kan gå vidare — finns det ett sätt att börja som passar just er.</p>
+      <p data-en>Whether you have a concrete project on the table, are still looking for the right entry point — or need to land on a shared picture before moving forward — there's a way to start that fits exactly where you are.</p>
+      <p class="sub" data-sv>Nedan förklarar vi hur vi tänker kring AI-transformation, vad som skiljer en digital assistent från en autonom agent — och fem konkreta sätt att börja arbeta tillsammans.</p>
+      <p class="sub" data-en>Below we explain how we think about AI transformation, what separates a digital assistant from an autonomous agent — and five concrete ways to begin working together.</p>
+    </div>
+  </section>
+
+  <!-- ░ CREDIBILITY STRIP ░ -->
+  <div class="cred">
+    <div class="cred-item">
+      <span data-sv><strong>20+</strong> branscher</span>
+      <span data-en><strong>20+</strong> industries</span>
+    </div>
+    <div class="cred-item">
+      <span data-sv>Scale-ups till <strong>börsnoterade banker</strong></span>
+      <span data-en>Scale-ups to <strong>listed banks</strong></span>
+    </div>
+    <div class="cred-item">
+      <span data-sv>Arbetar med <strong>Indutrade</strong></span>
+      <span data-en>Working with <strong>Indutrade</strong></span>
+    </div>
+    <div class="cred-item">
+      <span data-sv>Agenter i <strong>produktion på veckor</strong></span>
+      <span data-en>Agents in <strong>production within weeks</strong></span>
+    </div>
+  </div>
+
+  <!-- ░ INTRO ░ -->
+  <div class="intro-section">
+    <div class="section-label">
+      <span data-sv>Varför det spelar roll nu</span>
+      <span data-en>Why this matters now</span>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-story">
+        <h2 class="intro-headline">
+          <span data-sv>Tekniken har rört sig snabbt. <mark>De flesta bolag inte.</mark></span>
+          <span data-en>Technology has moved fast. <mark>Most companies haven't.</mark></span>
+        </h2>
+        <p data-sv>I november 2022 demokratiserades AI när ChatGPT öppnades för allmänheten. Sedan dess har teknikutvecklingen rört sig snabbare än vi sett på decennier — nya modeller, nya förmågor och nya möjligheter, i stort sett varje kvartal.</p>
+        <p data-en>In November 2022, AI was democratised when ChatGPT opened to the public. Since then, technology has moved faster than we've seen in decades — new models, new capabilities, new possibilities, roughly every quarter.</p>
+        <p data-sv>Frågar man de flesta företagsledare hur mycket det faktiskt <em>förändrat hur deras organisation arbetar</em> under samma period — är svaret ofta: ganska lite.</p>
+        <p data-en>Ask most business leaders how much it has actually <em>changed how their organisation works</em> in the same period — the answer is often: not much.</p>
+        <p data-sv>Det gapet — mellan vad tekniken kan och vad organisationer faktiskt gör — är en av de tydligaste konkurrensfördelarna som finns att hämta just nu. Och den krymper för varje kvartal som går.</p>
+        <p data-en>That gap — between what technology can do and what organisations actually do — is one of the clearest competitive advantages available right now. And it narrows every quarter.</p>
+      </div>
+      <div>
+        <div class="intro-role-inner">
+          <div class="intro-role-label">Raincode</div>
+          <p data-sv>Vi är en tech- och AI-transformationspartner. Vi bygger digitala produkter, AI-agenter, system och funktioner — men vi är också en partner med en beprövad process som ger konkreta svar på de tre frågor de flesta organisationer fastnar på:</p>
+          <p data-en>We are a tech and AI transformation partner. We build digital products, AI agents, systems, and features — but we also bring a proven process that gives concrete answers to the three questions most organisations get stuck on:</p>
+          <div class="intro-pillars">
+            <div class="intro-pillar">
+              <div class="intro-pillar-num">1</div>
+              <div><strong data-sv>Var ska vi börja?</strong><strong data-en>Where do we start?</strong> <span data-sv>Hitta de initiativ som ger störst affärsvärde, i just er verksamhet.</span><span data-en>Identify the initiatives that create most business value in your specific context.</span></div>
+            </div>
+            <div class="intro-pillar">
+              <div class="intro-pillar-num">2</div>
+              <div><strong data-sv>Hur bygger vi in det?</strong><strong data-en>How do we build it in?</strong> <span data-sv>Integrera AI i era processer och system — inte vid sidan av dem.</span><span data-en>Integrate AI into your processes and systems — not alongside them.</span></div>
+            </div>
+            <div class="intro-pillar">
+              <div class="intro-pillar-num">3</div>
+              <div><strong data-sv>Hur räknar vi hem det?</strong><strong data-en>How do we measure the return?</strong> <span data-sv>Mät tydligt affärsvärde — inte aktivitet eller promptkvalitet.</span><span data-en>Measure clear business value — not activity or prompt quality.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░ POSITIONING ░ -->
+  <div class="position-section">
+    <div class="section-label">
+      <span data-sv>Vår position</span>
+      <span data-en>How we're different</span>
+    </div>
+    <div class="position-intro">
+      <h2 class="position-headline">
+        <span data-sv>Ni använder redan AI. Det är ett bra steg — men inte ett agentsteg.</span>
+        <span data-en>You're already using AI. That's a good start — but it's not the same as agents.</span>
+      </h2>
+      <p class="position-sub">
+        <span data-sv>ChatGPT, Copilot och Claude är kraftfulla verktyg — men de väntar på er. Ni är fortfarande den som initierar, utvärderar och agerar. En AI-agent arbetar åt er, utan att ni behöver vara i loopen.</span>
+        <span data-en>ChatGPT, Copilot, and Claude are powerful tools — but they wait for you. You're still the one who initiates, evaluates, and acts. An AI agent works for you, without you needing to be in the loop.</span>
+      </p>
+    </div>
+    <div class="pos-grid">
+      <!-- Left: LLMs -->
+      <div class="pos-card pos-llm">
+        <div class="pos-tag">ChatGPT &nbsp;·&nbsp; Copilot &nbsp;·&nbsp; Claude</div>
+        <div class="pos-name">
+          <span data-sv>Konversations-AI</span>
+          <span data-en>Conversational AI</span>
+        </div>
+        <div class="pos-flow">
+          <span data-sv>Ni frågar</span><span data-en>You ask</span>
+          <span class="pos-flow-arr">→</span>
+          <span data-sv>Den svarar</span><span data-en>It answers</span>
+          <span class="pos-flow-arr">→</span>
+          <span data-sv>Ni agerar</span><span data-en>You act</span>
+          <span class="pos-flow-arr">→</span>
+          <span data-sv>Upprepa</span><span data-en>Repeat</span>
+        </div>
+        <div class="pos-items">
+          <div class="pos-item"><div class="pos-item-dot"></div><span data-sv>Varje steg kräver er aktiva medverkan</span><span data-en>Every step requires your active involvement</span></div>
+          <div class="pos-item"><div class="pos-item-dot"></div><span data-sv>Ni måste initiera — den agerar inte på eget initiativ</span><span data-en>You must initiate — it doesn't act on its own</span></div>
+          <div class="pos-item"><div class="pos-item-dot"></div><span data-sv>Utmärkt för enskilda uppgifter: utkast, frågor, sammanfattningar</span><span data-en>Excellent for individual tasks: drafts, questions, summaries</span></div>
+          <div class="pos-item"><div class="pos-item-dot"></div><span data-sv>Sparar minuter per uppgift — men ni är kvar i processen</span><span data-en>Saves minutes per task — but you remain in the process</span></div>
+        </div>
+        <div class="pos-result">
+          <span data-sv>Ni är fortfarande operatören.</span>
+          <span data-en>You are still the operator.</span>
+        </div>
+      </div>
+      <!-- VS divider -->
+      <div class="pos-vs"><div class="pos-vs-inner">VS</div></div>
+      <!-- Right: Agents -->
+      <div class="pos-card pos-agent">
+        <div class="pos-tag">Raincode AI-agenter</div>
+        <div class="pos-name">
+          <span data-sv>Autonoma AI-agenter</span>
+          <span data-en>Autonomous AI Agents</span>
+        </div>
+        <div class="pos-flow">
+          <span data-sv>Ni sätter ett mål</span><span data-en>You set a goal</span>
+          <span class="pos-flow-arr">→</span>
+          <span data-sv>Agenten planerar &amp; agerar</span><span data-en>Agent plans &amp; acts</span>
+          <span class="pos-flow-arr">→</span>
+          <span data-sv>Ni får resultaten</span><span data-en>You get the results</span>
+        </div>
+        <div class="pos-items">
+          <div class="pos-item"><div class="pos-item-dot"></div><span data-sv>Kör hela processer — utan er inblandning</span><span data-en>Runs entire processes — without your involvement</span></div>
+          <div class="pos-item"><div class="pos-item-dot"></div><span data-sv>Arbetar dygnet runt: bevakar, analyserar, agerar, rapporterar</span><span data-en>Works around the clock: monitors, analyses, acts, reports</span></div>
+          <div class="pos-item"><div class="pos-item-dot"></div><span data-sv>Integreras i era system — e-post, CRM, databaser, rapporter</span><span data-en>Integrates with your systems — email, CRM, databases, reports</span></div>
+          <div class="pos-item"><div class="pos-item-dot"></div><span data-sv>Eliminerar arbetsflöden, inte bara enskilda steg</span><span data-en>Eliminates workflows, not just individual steps</span></div>
+        </div>
+        <div class="pos-result">
+          <span data-sv>Ni är beställaren. Agenten är utföraren.</span>
+          <span data-en>You are the client. The agent is the executor.</span>
+        </div>
+      </div>
+    </div>
+    <!-- Concrete example -->
+    <div class="pos-example">
+      <div class="pos-ex-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      </div>
+      <div>
+        <div class="pos-ex-label">
+          <span data-sv>Vad det innebär i praktiken</span>
+          <span data-en>What this means in practice</span>
+        </div>
+        <p class="pos-ex-text">
+          <span data-sv>Tänk er att era <strong>SEM-rapporter genereras automatiskt varje vecka</strong>, kundrecensioner bevakas och eskaleras direkt, och fakturaavstämningar sköter sig själva — utan att ni öppnar ett enda verktyg. Det är vad Viva Medias team upplever varje vecka. Ni chattar inte med en AI. Ni har en AI som arbetar.</span>
+          <span data-en>Imagine your <strong>SEM reports generating automatically every week</strong>, customer reviews being monitored and escalated instantly, and invoice reconciliations running on their own — without you opening a single tool. That's what Viva Media's team experiences every week. You're not chatting with an AI. You have an AI that works.</span>
+        </p>
+      </div>
+    </div>
+    <!-- Transformation dimensions -->
+    <div class="dim-intro-row">
+      <span class="dim-intro-label"><span data-sv>Och det stannar inte vid agenter</span><span data-en>And it goes beyond agents</span></span>
+      <div class="dim-intro-line"></div>
+    </div>
+    <div class="dim-grid">
+
+      <div class="dim-card">
+        <div class="dim-title"><span data-sv>Systemintegration</span><span data-en>System integration</span></div>
+        <div class="dim-block">
+          <div class="dim-source dim-source-llm"><span data-sv>AI-verktyg</span><span data-en>AI tools</span></div>
+          <div class="dim-text dim-text-llm"><span data-sv>Lever utanför era system. Ni kopierar in och ut manuellt.</span><span data-en>Lives outside your systems. You copy in and out manually.</span></div>
+        </div>
+        <div class="dim-divider"></div>
+        <div class="dim-block">
+          <div class="dim-source dim-source-rc">Raincode</div>
+          <div class="dim-text dim-text-rc"><span data-sv>Agenten är inbyggd i er tech-stack — CRM, e-post, databaser, rapporter. Den agerar direkt i era system.</span><span data-en>The agent is built into your tech stack — CRM, email, databases, reports. It acts directly in your systems.</span></div>
+        </div>
+      </div>
+
+      <div class="dim-card">
+        <div class="dim-title"><span data-sv>Kontinuitet</span><span data-en>Continuity</span></div>
+        <div class="dim-block">
+          <div class="dim-source dim-source-llm"><span data-sv>AI-verktyg</span><span data-en>AI tools</span></div>
+          <div class="dim-text dim-text-llm"><span data-sv>Aktiv bara när ni är det. Stänger ni fliken stannar allt.</span><span data-en>Active only when you are. Close the tab and everything stops.</span></div>
+        </div>
+        <div class="dim-divider"></div>
+        <div class="dim-block">
+          <div class="dim-source dim-source-rc">Raincode</div>
+          <div class="dim-text dim-text-rc"><span data-sv>Kör dygnet runt, alla dagar — bevakar, agerar och rapporterar oavsett om ni är inloggade.</span><span data-en>Runs around the clock, every day — monitors, acts and reports regardless of whether you're logged in.</span></div>
+        </div>
+      </div>
+
+      <div class="dim-card">
+        <div class="dim-title"><span data-sv>Anpassning</span><span data-en>Customisation</span></div>
+        <div class="dim-block">
+          <div class="dim-source dim-source-llm"><span data-sv>AI-verktyg</span><span data-en>AI tools</span></div>
+          <div class="dim-text dim-text-llm"><span data-sv>Generell kunskap om allt i allmänhet. Vet ingenting om just er verksamhet, era processer eller er data.</span><span data-en>General knowledge about everything in general. Knows nothing specific about your business, processes, or data.</span></div>
+        </div>
+        <div class="dim-divider"></div>
+        <div class="dim-block">
+          <div class="dim-source dim-source-rc">Raincode</div>
+          <div class="dim-text dim-text-rc"><span data-sv>Tränad på era processer, er data och era regler. Agenten vet hur just ni arbetar.</span><span data-en>Trained on your processes, your data, and your rules. The agent knows exactly how you work.</span></div>
+        </div>
+      </div>
+
+      <div class="dim-card">
+        <div class="dim-title"><span data-sv>Mätbarhet</span><span data-en>Measurability</span></div>
+        <div class="dim-block">
+          <div class="dim-source dim-source-llm"><span data-sv>AI-verktyg</span><span data-en>AI tools</span></div>
+          <div class="dim-text dim-text-llm"><span data-sv>Svårt att kvantifiera effekten. Ni vet att det är nyttigt — men inte hur mycket.</span><span data-en>Hard to quantify the impact. You know it's useful — but not by how much.</span></div>
+        </div>
+        <div class="dim-divider"></div>
+        <div class="dim-block">
+          <div class="dim-source dim-source-rc">Raincode</div>
+          <div class="dim-text dim-text-rc"><span data-sv>Varje agent kopplas till konkreta KPI:er. Ni mäter affärsresultat — inte promptkvalitet.</span><span data-en>Every agent is tied to concrete KPIs. You measure business outcomes — not prompt quality.</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Closing statement -->
+    <div class="pos-closer">
+      <div class="pos-closer-text">
+        <span data-sv>AI-transformation handlar inte om att använda <mark>bättre verktyg.</mark> Det handlar om att bygga AI in i hur er verksamhet fungerar — processer, system och team.</span>
+        <span data-en>AI transformation isn't about using <mark>better tools.</mark> It's about building AI into how your business operates — processes, systems, and people.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ░ AI TRANSFORMATION ░ -->
+  <div class="ai-types-section">
+    <div class="section-label">
+      <span data-sv>AI-transformation i två delar</span>
+      <span data-en>AI transformation in two dimensions</span>
+    </div>
+    <p class="ai-types-intro">
+      <span data-sv>Vi approchar AI-transformation längs två parallella spår. Det ena handlar om att ta det ni redan gör och göra det effektivare, mer automatiserat och modernt. Det andra handlar om att använda AI för att skapa helt ny affärsnytta — nya erbjudanden, nya intäktsströmmar, en stärkt affärsmodell. De flesta organisationer har möjligheter inom båda.</span>
+      <span data-en>We approach AI transformation along two parallel tracks. One is about taking what you already do and making it more efficient, automated, and modern. The other is about using AI to create entirely new business value — new offerings, new revenue streams, a stronger business model. Most organisations have opportunities in both.</span>
+    </p>
+    <div class="ai-types-grid">
+
+      <!-- Operational AI -->
+      <div class="at-card at-op">
+        <div>
+          <div class="at-label" data-sv>Operationell AI</div>
+          <div class="at-label" data-en>Operational AI</div>
+          <div class="at-name">
+            <span data-sv>Skapa värde <em>i</em> verksamheten</span>
+            <span data-en>Create value <em>inside</em> the business</span>
+          </div>
+          <div class="at-tagline" data-sv>Effektivisera · Modernisera · Automatisera</div>
+          <div class="at-tagline" data-en>Streamline · Modernise · Automate</div>
+        </div>
+        <p class="at-desc" data-sv>Titta på det ni gör idag — och gör det bättre med AI. Arbetsprocesser som är administrationstungt, tidskrävande, repetitivt eller inkonsekvent utförda kan nästan alltid moderniseras. Och dessa processer finns hos alla bolag, i alla branscher.</p>
+        <p class="at-desc" data-en>Look at what you do today — and do it better with AI. Processes that are admin-heavy, time-consuming, repetitive, or inconsistently performed can almost always be modernised. And they exist in every company, in every industry.</p>
+        <div class="op-diagram">
+          <div class="op-areas-col op-left">
+            <div class="op-area-item">
+              <div class="op-area-title" data-sv>Finans &amp; Admin</div><div class="op-area-title" data-en>Finance &amp; Admin</div>
+              <div class="op-area-text" data-sv>Faktura- och expense-automation. Avstämningar utan manuell input.</div>
+              <div class="op-area-text" data-en>Invoice and expense automation. Reconciliations without manual input.</div>
+            </div>
+            <div class="op-area-item">
+              <div class="op-area-title">Management</div>
+              <div class="op-area-text" data-sv>AI-drivet beslutsstöd &amp; real-time dashboards. Automatiserade KPI-rapporter.</div>
+              <div class="op-area-text" data-en>AI-driven decision support &amp; real-time dashboards. Automated KPI reports.</div>
+            </div>
+          </div>
+          <div class="op-center-col">
+            <div class="op-top-area">
+              <div class="op-area-title" data-sv>Kundtjänst</div><div class="op-area-title" data-en>Customer Service</div>
+              <div class="op-area-text" data-sv>24/7 chatbots &amp; automatisk ärendehantering.</div>
+              <div class="op-area-text" data-en>24/7 chatbots &amp; automated ticket handling.</div>
+            </div>
+            <div class="op-circle">
+              <div class="op-circle-label" data-sv>Operationell</div><div class="op-circle-label" data-en>Operational</div>
+              <div class="op-circle-word">AI</div>
+            </div>
+            <div class="op-bot-area">
+              <div class="op-area-title" data-sv>Sales &amp; Marketing</div><div class="op-area-title" data-en>Sales &amp; Marketing</div>
+              <div class="op-area-text" data-sv>Lead scoring &amp; kundprioritering. Automatiserade offerter.</div>
+              <div class="op-area-text" data-en>Lead scoring &amp; customer prioritisation. Automated quotes.</div>
+            </div>
+          </div>
+          <div class="op-areas-col op-right">
+            <div class="op-area-item">
+              <div class="op-area-title">Operations</div>
+              <div class="op-area-text" data-sv>Prediktiv planering &amp; schemaläggning. Supply chain-optimering.</div>
+              <div class="op-area-text" data-en>Predictive planning &amp; scheduling. Supply chain optimisation.</div>
+            </div>
+            <div class="op-area-item">
+              <div class="op-area-title">HR</div>
+              <div class="op-area-text" data-sv>AI-stöd i rekrytering &amp; screening. Automatiserade onboarding-flöden.</div>
+              <div class="op-area-text" data-en>AI support in recruitment &amp; screening. Automated onboarding flows.</div>
+            </div>
+          </div>
+        </div>
+        <div class="at-study-note" data-sv>💡 Enligt OpenAI:s forskning kan 75–80% av kontorsarbetares arbetsuppgifter påverkas av AI — oberoende av bransch eller bolagsstorlek.</div>
+        <div class="at-study-note" data-en>💡 According to OpenAI's research, 75–80% of office workers' tasks can be affected by AI — regardless of industry or company size.</div>
+      </div>
+
+      <!-- Innovation AI -->
+      <div class="at-card at-inn">
+        <div>
+          <div class="at-label" data-sv>Innovations-AI</div>
+          <div class="at-label" data-en>Innovation AI</div>
+          <div class="at-name">
+            <span data-sv>Skapa värde <em>av</em> verksamheten</span>
+            <span data-en>Create value <em>from</em> the business</span>
+          </div>
+          <div class="at-tagline" data-sv>Nytt värdeerbjudande · Nya intäkter · Ny affärsmodell</div>
+          <div class="at-tagline" data-en>New value proposition · New revenue · New business model</div>
+        </div>
+        <p class="at-desc" data-sv>Hur kan AI stärka ert värdeerbjudande mot kund? Kan ni skapa nya intäktsströmmar, bygga nya produkter eller framtidssäkra er affärsmodell med hjälp av ny teknik? Här handlar det om att tänka nytt — inte bara effektivisera det ni redan gör.</p>
+        <p class="at-desc" data-en>How can AI strengthen your value proposition? Can you create new revenue streams, build new products, or future-proof your business model with new technology? This is about thinking differently — not just doing what you do more efficiently.</p>
+        <div class="inn-diagram">
+          <div class="inn-items inn-left">
+            <div class="inn-item">
+              <div class="inn-item-title">Data</div>
+              <div class="inn-item-text" data-sv>Grunden för analys, beslutsstöd och intelligenta funktioner.</div>
+              <div class="inn-item-text" data-en>The foundation for analysis, decision support, and intelligent features.</div>
+            </div>
+            <div class="inn-item">
+              <div class="inn-item-title" data-sv>Infrastruktur</div><div class="inn-item-title" data-en>Infrastructure</div>
+              <div class="inn-item-text" data-sv>Förbinder data, teknik och verksamhet för att möjliggöra AI-innovation.</div>
+              <div class="inn-item-text" data-en>Connects data, technology, and the business to enable AI innovation.</div>
+            </div>
+            <div class="inn-item">
+              <div class="inn-item-title" data-sv>Processer</div><div class="inn-item-title" data-en>Processes</div>
+              <div class="inn-item-text" data-sv>Kopplar data till verkliga flöden där affärsvärde skapas.</div>
+              <div class="inn-item-text" data-en>Connects data to real workflows where business value is created.</div>
+            </div>
+          </div>
+          <div class="inn-center-col">
+            <div class="inn-arrow">→</div>
+            <div class="inn-circle"><div class="inn-circle-word">AI</div></div>
+            <div class="inn-arrow">→</div>
+          </div>
+          <div class="inn-items inn-right">
+            <div class="inn-item">
+              <div class="inn-item-title" data-sv>AI-drivna funktioner</div><div class="inn-item-title" data-en>AI-powered features</div>
+              <div class="inn-item-text" data-sv>Effektivare processer, smartare beslut, högre precision och skalbarhet.</div>
+              <div class="inn-item-text" data-en>More efficient processes, smarter decisions, higher precision and scalability.</div>
+            </div>
+            <div class="inn-item">
+              <div class="inn-item-title" data-sv>Produkter &amp; tjänster</div><div class="inn-item-title" data-en>Products &amp; services</div>
+              <div class="inn-item-text" data-sv>Skapar nya digitala erbjudanden och affärsmöjligheter mot kund.</div>
+              <div class="inn-item-text" data-en>Creates new digital offerings and business opportunities for customers.</div>
+            </div>
+            <div class="inn-item">
+              <div class="inn-item-title" data-sv>Affärsmodell</div><div class="inn-item-title" data-en>Business model</div>
+              <div class="inn-item-text" data-sv>Flexibilitet, anpassning och hållbar tillväxt med framtidsfokus.</div>
+              <div class="inn-item-text" data-en>Flexibility, adaptability, and sustainable growth with a future focus.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ░ PATHWAYS ░ -->
+  <div class="section-label">
+    <span data-sv>Fem vägar — hitta er</span>
+    <span data-en>Five paths — find yours</span>
+  </div>
+  <div class="pathways">
+
+    <!-- Workshop -->
+    <button class="pw" data-id="workshop" aria-expanded="false">
+      <div class="pw-num" data-sv>01 · Workshop</div>
+      <div class="pw-num" data-en>01 · Workshop</div>
+      <h3 data-sv>Ena ledningsgruppen. I en session.</h3>
+      <h3 data-en>Align the leadership team. In one session.</h3>
+      <div class="promise" data-sv>En halvdag med utbildning, insikter och gemensam prioritering. Resultatet byggs på ert eget material — era ord, era prioriteringar, ert nästa steg.</div>
+      <div class="promise" data-en>A half-day combining education, insights, and facilitated alignment. The outputs are built on your own material — your words, your priorities, your next step.</div>
+      <div class="fits-when" data-sv>
+        <strong>Passar när</strong>
+        Ledningsgruppen saknar en gemensam bild av AI:s roll. Ni behöver samsyn — en gemensam utgångspunkt — innan ni kan fatta ett välgrundat beslut.
+      </div>
+      <div class="fits-when" data-en>
+        <strong>This fits when</strong>
+        The leadership team lacks a shared view on AI's role. You need alignment — a shared starting point — before you can make an informed decision.
+      </div>
+      <div class="meta">
+        <div>
+          <div class="price">30 000 kr</div>
+          <div style="font-size:10.5px;margin-top:2px" data-sv>Fast pris</div>
+          <div style="font-size:10.5px;margin-top:2px" data-en>Fixed fee</div>
+        </div>
+        <span data-sv>Halvdag</span>
+        <span data-en>Half-day</span>
+      </div>
+      <div class="expand-hint">
+        <span data-sv>Vad ingår</span>
+        <span data-en>What's included</span>
+        <span class="arrow">&#9660;</span>
+      </div>
+      <div class="detail">
+        <h4 data-sv>Innehåll</h4><h4 data-en>What's covered</h4>
+        <ul>
+          <li data-sv>Business Outcome First — varför 95% av AI-projekt misslyckas, och det vinnande mönstret</li><li data-en>Business Outcome First — why 95% of AI projects fail, and the winning pattern</li>
+          <li data-sv>Operationell AI vs Innovations-AI — de två sätten att skapa värde</li><li data-en>Operational AI vs Innovation AI — the two ways to create value</li>
+          <li data-sv>Värde/insats-matrisen — hur ni hittar rätt startpunkt</li><li data-en>Value/effort matrix — how to identify the right starting point</li>
+          <li data-sv>Live-demo anpassad till er bransch</li><li data-en>Live demo tailored to your industry</li>
+          <li data-sv>Enkätresultat tillbaka till rummet — era egna ord, ofiltrerade</li><li data-en>Survey results reflected back to the room — your own words, unfiltered</li>
+          <li data-sv>Teknisk genomgång och AI-mognadsanalys</li><li data-en>Tech stack review and AI maturity assessment</li>
+          <li data-sv>Gemensam prioriteringsdiskussion med röstning</li><li data-en>Facilitated discussion + priority voting</li>
+        </ul>
+        <h4 data-sv>Ni lämnar med</h4><h4 data-en>You leave with</h4>
+        <div data-sv>En rankad prioritetslista som hela gruppen bidragit till, intern samsyn och ett namngivet nästa steg. Ingen i rummet behöver driva frågan internt efteråt.</div>
+        <div data-en>A ranked priority list that the whole group contributed to, internal alignment, and a named next step. No single person has to champion it internally afterward.</div>
+      </div>
+    </button>
+
+    <!-- Impact Scan -->
+    <button class="pw" data-id="impact-scan" aria-expanded="false">
+      <div class="pw-num" data-sv>02 · Impact Scan</div>
+      <div class="pw-num" data-en>02 · Impact Scan</div>
+      <h3 data-sv>Inifrån och utifrån. Rätt prioriteringar från start.</h3>
+      <h3 data-en>Inside and outside. Right priorities from the start.</h3>
+      <div class="promise" data-sv>Nio veckor. En fullständig genomlysning av er verksamhet — vi kartlägger processer, intervjuar personal på alla nivåer och väger er interna bild mot oberoende marknadsintelligens.</div>
+      <div class="promise" data-en>Nine weeks. A full analysis of your business — we map processes, interview staff at all levels, and combine your internal view with independent market intelligence.</div>
+      <div class="fits-when" data-sv>
+        <strong>Passar när</strong>
+        Ni vet att AI spelar en roll — men inte var ni ska börja. Interna prioriteringar går isär. Ni vill ha ett oberoende externt underlag som kombinerar er upplevelse med hur det faktiskt fungerar.
+      </div>
+      <div class="fits-when" data-en>
+        <strong>This fits when</strong>
+        You know AI matters — but not where to start. Priorities diverge internally. You want an independent external baseline that combines your experience with how things actually work.
+      </div>
+      <div class="meta">
+        <div>
+          <div class="price">95 000 kr</div>
+          <div style="font-size:10.5px;margin-top:2px" data-sv>Fast pris</div>
+          <div style="font-size:10.5px;margin-top:2px" data-en>Fixed fee</div>
+        </div>
+        <span data-sv>~9 veckor</span>
+        <span data-en>~9 weeks</span>
+      </div>
+      <div class="expand-hint">
+        <span data-sv>Vad ingår</span>
+        <span data-en>What's included</span>
+        <span class="arrow">&#9660;</span>
+      </div>
+      <div class="detail">
+        <h4 data-sv>Leveranser</h4><h4 data-en>Deliverables</h4>
+        <ul>
+          <li data-sv>Processkartläggning — hur det faktiskt fungerar, inte bara hur ni tror att det gör</li><li data-en>Process mapping — how things actually work, not just how you think they do</li>
+          <li data-sv>Intervjuer på alla nivåer — inte bara ledning</li><li data-en>Interviews at all levels — not just leadership</li>
+          <li data-sv>Oberoende marknadsanalys och konkurrensöversikt</li><li data-en>Independent market analysis and competitive overview</li>
+          <li data-sv>ROI-kalkyl för varje initiativ</li><li data-en>ROI estimate per initiative</li>
+          <li data-sv>Prioriterad AI-färdplan med finansiell modell</li><li data-en>Prioritized AI roadmap with financial model</li>
+          <li data-sv>Fullständig rapport + infografik + podd-avsnitt + sammanfattning för ledningen</li><li data-en>Full report + infographic + podcast episode + executive summary</li>
+        </ul>
+        <h4 data-sv>Passar alla bolag</h4><h4 data-en>Works for any company</h4>
+        <div data-sv>Processen är utformad för att fungera oavsett bolagets storlek, bransch eller AI-mognad. Strukturen är densamma — analysen anpassas helt efter er verksamhet.</div>
+        <div data-en>The process is designed to work regardless of company size, industry, or AI maturity. The structure is the same — the analysis adapts entirely to your business.</div>
+      </div>
+    </button>
+
+    <!-- AI Agents -->
+    <button class="pw" data-id="ai-agents" aria-expanded="false">
+      <div class="pw-num" data-sv>03 · AI-agenter</div>
+      <div class="pw-num" data-en>03 · AI Agents</div>
+      <h3 data-sv>Välbeprövade agenter. Klara på veckor.</h3>
+      <h3 data-en>Battle-tested agents. Live in weeks.</h3>
+      <div class="promise" data-sv>Produktionsklara AI-agenter med ursprung i impactanalyser från 20+ branscher. Välj den agent som löser er vanligaste friktionspunkt — driftsatt i er miljö, mätt på resultatet.</div>
+      <div class="promise" data-en>Production-ready AI agents derived from impact analyses across 20+ industries. Pick the agent that solves your most common friction point — deployed in your environment, measured on outcome.</div>
+      <div class="fits-when" data-sv>
+        <strong>Passar när</strong>
+        Ni vill se att AI faktiskt levererar innan ni satsar mer. Ni vill ha ett konkret resultat snabbt — utan att sjösätta ett stort projekt. Ofta ett naturligt nästa steg efter en Impact Scan.
+      </div>
+      <div class="fits-when" data-en>
+        <strong>This fits when</strong>
+        You want proof that AI delivers before committing to more. You want a concrete result fast — without launching a large project. Often a natural next step after an Impact Scan.
+      </div>
+      <div class="meta">
+        <div>
+          <div class="price" data-sv>från 1 995 kr<span class="price-sub">/mån</span></div>
+          <div class="price" data-en>from 1,995 kr<span class="price-sub">/month</span></div>
+          <div style="font-size:10.5px;margin-top:2px" data-sv>Impl. 30 000 kr · engångskostnad</div>
+          <div style="font-size:10.5px;margin-top:2px" data-en>Impl. 30,000 kr · one-time</div>
+        </div>
+        <span data-sv>3–6 veckor</span>
+        <span data-en>3–6 weeks</span>
+      </div>
+      <div class="expand-hint">
+        <span data-sv>Vad ingår</span>
+        <span data-en>What's included</span>
+        <span class="arrow">&#9660;</span>
+      </div>
+      <div class="detail">
+        <h4 data-sv>Leveranser</h4><h4 data-en>Deliverables</h4>
+        <ul>
+          <li data-sv>Produktionsklar AI-agent, driftsatt i er miljö</li><li data-en>Production-ready AI agent, deployed in your environment</li>
+          <li data-sv>Monitorering, dokumentation och överlämningsdokumentation</li><li data-en>Monitoring, documentation, and handoff runbook</li>
+          <li data-sv>Löpande drift och vidareutveckling ingår i månadsavgiften</li><li data-en>Ongoing operation and development included in monthly fee</li>
+        </ul>
+        <h4 data-sv>Varför det går snabbt</h4><h4 data-en>Why it's fast</h4>
+        <div data-sv>Agenterna byggs inte från grunden. De har sitt ursprung i impactanalyser vi gjort i 20+ branscher — där vi identifierat de friktionspunkter som nästan alla bolag delar.</div>
+        <div data-en>The agents aren't built from scratch. They originate from impact analyses across 20+ industries where we identified the pain points that almost all companies share.</div>
+        <a class="agents-link" href="https://ai-agents.raincode.tech/" target="_blank" rel="noopener" data-sv>Utforska alla tillgängliga agenter &#8599;</a>
+        <a class="agents-link" href="https://ai-agents.raincode.tech/" target="_blank" rel="noopener" data-en>Explore all available agents &#8599;</a>
+      </div>
+    </button>
+
+    <!-- Project Work -->
+    <button class="pw" data-id="project" aria-expanded="false">
+      <div class="pw-num" data-sv>04 · Projektleverans</div>
+      <div class="pw-num" data-en>04 · Project Work</div>
+      <h3 data-sv>Ni vet vad som ska byggas. Vi bygger det.</h3>
+      <h3 data-en>You know what to build. We build it.</h3>
+      <div class="promise" data-sv>Definierat scope, dedikerat team, levererat hela vägen. Vi arbetar med ert team eller självständigt — med svenska projektledare som håller i taktpinnen.</div>
+      <div class="promise" data-en>Defined scope, dedicated team, delivered end-to-end. We work with your team or independently — with Swedish project managers keeping the pace.</div>
+      <div class="fits-when" data-sv>
+        <strong>Passar när</strong>
+        Ni har ett klart krav eller en RFP redo. Ni är redo att bygga — ni behöver en leveranspartner, inte en analysprocess.
+      </div>
+      <div class="fits-when" data-en>
+        <strong>This fits when</strong>
+        You have a concrete requirement or an RFP ready. You're ready to build — you need a delivery partner, not a discovery process.
+      </div>
+      <div class="meta">
+        <div>
+          <div class="price" data-sv>Prissatt per uppdrag</div>
+          <div class="price" data-en>Scoped per engagement</div>
+          <div style="font-size:10.5px;margin-top:2px" data-sv>Fast pris eller löpande</div>
+          <div style="font-size:10.5px;margin-top:2px" data-en>Fixed-price or T&amp;M</div>
+        </div>
+        <span data-sv>från 1 mån</span>
+        <span data-en>from 1 month</span>
+      </div>
+      <div class="expand-hint">
+        <span data-sv>Vad ingår</span>
+        <span data-en>What's included</span>
+        <span class="arrow">&#9660;</span>
+      </div>
+      <div class="detail">
+        <h4 data-sv>Leveranser</h4><h4 data-en>Deliverables</h4>
+        <ul>
+          <li data-sv>Komplett leverans av den definierade lösningen</li><li data-en>End-to-end build of the defined solution</li>
+          <li data-sv>Svenska projektledare med tydliga milstolpar</li><li data-en>Swedish project managers with clear delivery milestones</li>
+          <li data-sv>Möjlighet att arbeta integrerat med ert eget team</li><li data-en>Option to integrate with your own team</li>
+          <li data-sv>Överlämning, dokumentation och supportperiod</li><li data-en>Handover, documentation, and support runway</li>
+        </ul>
+        <h4 data-sv>Typiska lösningar</h4><h4 data-en>Typical solutions</h4>
+        <div data-sv>Dataplattformar, AI-agentsviter, systemintegrationer, applikationsmodernisering och skräddarsydda beslutsstödsystem.</div>
+        <div data-en>Data platforms, AI agent suites, system integrations, application modernization, custom decision-support systems.</div>
+      </div>
+    </button>
+
+    <!-- Insourcing -->
+    <button class="pw" data-id="insourcing" aria-expanded="false">
+      <div class="pw-num" data-sv>05 · Insourcingslösning</div>
+      <div class="pw-num" data-en>05 · Embedded Consultant</div>
+      <h3 data-sv>En av oss. Fast hos er.</h3>
+      <h3 data-en>One of ours. Working as one of yours.</h3>
+      <div class="promise" data-sv>En erfaren Raincode-konsult ansluter till ert team — arbetar i er miljö, i er struktur, sida vid sida med era egna. Ni behåller kontrollen. Vi bidrar med kompetensen.</div>
+      <div class="promise" data-en>An experienced Raincode consultant joins your team — working in your environment, within your structure, side by side with your own people. You keep control. We bring the expertise.</div>
+      <div class="fits-when" data-sv>
+        <strong>Passar när</strong>
+        Ni har ett pågående AI-initiativ men saknar kapacitet eller rätt kompetens internt. Ni vill förstärka teamet med någon som fungerar precis som en intern — utan omvägen via ett projektuppdrag.
+      </div>
+      <div class="fits-when" data-en>
+        <strong>This fits when</strong>
+        You have an ongoing AI initiative but lack internal capacity or expertise. You want to reinforce your team with someone who works just like an employee — without the overhead of a scoped project.
+      </div>
+      <div class="meta">
+        <div>
+          <div class="price" data-sv>595 kr<span class="price-sub">/tim</span></div>
+          <div class="price" data-en>595 kr<span class="price-sub">/hr</span></div>
+          <div style="font-size:10.5px;margin-top:2px" data-sv>Löpande · ingen bindningstid</div>
+          <div style="font-size:10.5px;margin-top:2px" data-en>Rolling · no lock-in</div>
+        </div>
+        <span data-sv>Löpande</span>
+        <span data-en>Ongoing</span>
+      </div>
+      <div class="expand-hint">
+        <span data-sv>Vad ingår</span>
+        <span data-en>What's included</span>
+        <span class="arrow">&#9660;</span>
+      </div>
+      <div class="detail">
+        <h4 data-sv>Hur det fungerar</h4><h4 data-en>How it works</h4>
+        <ul>
+          <li data-sv>Dedikerad konsult med relevant AI- och teknikkompetens</li><li data-en>Dedicated consultant with relevant AI and technical expertise</li>
+          <li data-sv>Arbetar i er miljö, era verktyg och era rutiner</li><li data-en>Works within your environment, tools, and routines</li>
+          <li data-sv>Full insyn och transparens — ni leder, vi levererar</li><li data-en>Full visibility and transparency — you lead, we deliver</li>
+          <li data-sv>Enkel avslutning eller förlängning utan bindningstid</li><li data-en>Smooth exit or extension with no lock-in</li>
+        </ul>
+        <h4 data-sv>Varför insourcing</h4><h4 data-en>Why insourcing</h4>
+        <div data-sv>Inget uppstartsmöte, ingen projektplan att godkänna. Konsulten är en del av ert team från dag ett — i era möten, i era kanaler, med era mål. Precis som en intern, men med Raincodes samlade erfarenhet i ryggen.</div>
+        <div data-en>No kickoff meeting to arrange, no project plan to approve. The consultant is part of your team from day one — in your meetings, your channels, toward your goals. Just like an employee, but with Raincode's collective expertise behind them.</div>
+      </div>
+    </button>
+
+  </div>
+
+  <!-- ░ QUIZ ░ -->
+  <div class="section-label">
+    <span data-sv>Fortfarande osäker?</span>
+    <span data-en>Still not sure?</span>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-header">
+      <div class="quiz-title">
+        <span data-sv>Vilket alternativ passar er situation?</span>
+        <span data-en>Which option fits your situation?</span>
+      </div>
+      <div class="quiz-sub">
+        <span data-sv>Svara på två frågor — vi rekommenderar en ingång.</span>
+        <span data-en>Answer two questions — we'll recommend a starting point.</span>
+      </div>
+    </div>
+    <div class="quiz-body" id="quiz">
+      <div class="quiz-step active" id="qstep-1">
+        <div class="quiz-q">
+          <span data-sv>Har ni ett konkret AI-behov idag, eller söker ni fortfarande rätt startpunkt?</span>
+          <span data-en>Do you have a concrete AI need today, or are you still looking for the right starting point?</span>
+        </div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="quizGo('2b')">
+            <span data-sv>Vi söker rätt startpunkt — vi vet att AI är viktigt men inte var vi ska börja</span>
+            <span data-en>We're still looking — we know AI matters but not where to start</span>
+          </button>
+          <button class="quiz-opt" onclick="quizGo('2a')">
+            <span data-sv>Vi har ett konkret behov eller ett pågående initiativ</span>
+            <span data-en>We have a concrete need or an ongoing initiative</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-step" id="qstep-2a">
+        <div class="quiz-q">
+          <span data-sv>Vad stämmer bäst in på er?</span>
+          <span data-en>What best describes your situation?</span>
+        </div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="quizResult('ai-agents')">
+            <span data-sv>Vi vill testa AI snabbt med ett konkret, avgränsat case</span>
+            <span data-en>We want to test AI quickly with a concrete, scoped use case</span>
+          </button>
+          <button class="quiz-opt" onclick="quizResult('project')">
+            <span data-sv>Vi har ett klart krav och behöver en leveranspartner</span>
+            <span data-en>We have a defined requirement and need a delivery partner</span>
+          </button>
+          <button class="quiz-opt" onclick="quizResult('insourcing')">
+            <span data-sv>Vi behöver förstärkning i ett befintligt team — inte outsourcing</span>
+            <span data-en>We need reinforcement in an existing team — not outsourcing</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-step" id="qstep-2b">
+        <div class="quiz-q">
+          <span data-sv>Hur pass enig är ledningsgruppen kring AI:s roll?</span>
+          <span data-en>How aligned is your leadership team on AI's role?</span>
+        </div>
+        <div class="quiz-opts">
+          <button class="quiz-opt" onclick="quizResult('workshop')">
+            <span data-sv>Det finns oenighet eller en gemensam bild saknas</span>
+            <span data-en>There's disagreement or a shared understanding is missing</span>
+          </button>
+          <button class="quiz-opt" onclick="quizResult('impact-scan')">
+            <span data-sv>Vi är eniga — men saknar underlag och vet inte var vi ska börja</span>
+            <span data-en>We're aligned — but lack a baseline and don't know where to start</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-result" id="qresult-workshop">
+        <div class="quiz-badge">
+          <div class="quiz-badge-label" data-sv>Rekommendation</div><div class="quiz-badge-label" data-en>Recommendation</div>
+          <div class="quiz-badge-name" data-sv>Workshop</div><div class="quiz-badge-name" data-en>Workshop</div>
+        </div>
+        <div class="quiz-explain">
+          <div class="quiz-explain-why">
+            <span data-sv>Utan en gemensam bild riskerar ett AI-initiativ att fastna i interna diskussioner. Workshoppen samlar er på en halvdag och ger en gemensam utgångspunkt — utan att ni behöver förbereda er ett dugg.</span>
+            <span data-en>Without alignment, an AI initiative risks stalling in internal discussions. The workshop brings your team together for a half-day and creates a shared starting point — no preparation required.</span>
+          </div>
+          <button class="quiz-explain-cta" onclick="scrollToCard('workshop')"><span data-sv>Läs mer om Workshop ↓</span><span data-en>Read more about Workshop ↓</span></button>
+          <button class="quiz-reset" onclick="quizReset()"><span data-sv>Börja om</span><span data-en>Start over</span></button>
+        </div>
+      </div>
+      <div class="quiz-result" id="qresult-impact-scan">
+        <div class="quiz-badge">
+          <div class="quiz-badge-label" data-sv>Rekommendation</div><div class="quiz-badge-label" data-en>Recommendation</div>
+          <div class="quiz-badge-name">Impact Scan</div>
+        </div>
+        <div class="quiz-explain">
+          <div class="quiz-explain-why">
+            <span data-sv>Ni har viljan men saknar ett oberoende underlag. Impact Scanen kombinerar er interna bild med extern marknadsintelligens och ger er en prioriterad färdplan med kvantifierat ROI — ett beslutsunderlag ni faktiskt kan agera på.</span>
+            <span data-en>You have the will but lack an independent baseline. The Impact Scan combines your internal view with external market intelligence and gives you a prioritized roadmap with quantified ROI — a basis for decisions you can actually act on.</span>
+          </div>
+          <button class="quiz-explain-cta" onclick="scrollToCard('impact-scan')"><span data-sv>Läs mer om Impact Scan ↓</span><span data-en>Read more about Impact Scan ↓</span></button>
+          <button class="quiz-reset" onclick="quizReset()"><span data-sv>Börja om</span><span data-en>Start over</span></button>
+        </div>
+      </div>
+      <div class="quiz-result" id="qresult-ai-agents">
+        <div class="quiz-badge">
+          <div class="quiz-badge-label" data-sv>Rekommendation</div><div class="quiz-badge-label" data-en>Recommendation</div>
+          <div class="quiz-badge-name" data-sv>AI-agenter</div><div class="quiz-badge-name" data-en>AI Agents</div>
+        </div>
+        <div class="quiz-explain">
+          <div class="quiz-explain-why">
+            <span data-sv>Ni är redo att agera — och det är precis vad AI-agenterna är byggda för. Välbeprövade lösningar från 20+ branscher, driftsatta i er miljö på 3–6 veckor. Ni ser ett verkligt resultat utan att sjösätta ett stort projekt.</span>
+            <span data-en>You're ready to act — and that's exactly what the AI agents are built for. Battle-tested solutions from 20+ industries, live in your environment within 3–6 weeks. You see a real result without launching a large project.</span>
+          </div>
+          <button class="quiz-explain-cta" onclick="scrollToCard('ai-agents')"><span data-sv>Läs mer om AI-agenter ↓</span><span data-en>Read more about AI Agents ↓</span></button>
+          <button class="quiz-reset" onclick="quizReset()"><span data-sv>Börja om</span><span data-en>Start over</span></button>
+        </div>
+      </div>
+      <div class="quiz-result" id="qresult-project">
+        <div class="quiz-badge">
+          <div class="quiz-badge-label" data-sv>Rekommendation</div><div class="quiz-badge-label" data-en>Recommendation</div>
+          <div class="quiz-badge-name" data-sv>Projektleverans</div><div class="quiz-badge-name" data-en>Project Work</div>
+        </div>
+        <div class="quiz-explain">
+          <div class="quiz-explain-why">
+            <span data-sv>Ni har ett klart krav och behöver någon som levererar. Projektleverans ger er ett dedikerat team med svenska projektledare som driver från analys till överlämning — fast pris eller löpande, vad som passar er.</span>
+            <span data-en>You have a clear requirement and need someone to deliver. Project Work gives you a dedicated team with Swedish project managers driving from analysis to handover — fixed price or T&M, whichever fits.</span>
+          </div>
+          <button class="quiz-explain-cta" onclick="scrollToCard('project')"><span data-sv>Läs mer om Projektleverans ↓</span><span data-en>Read more about Project Work ↓</span></button>
+          <button class="quiz-reset" onclick="quizReset()"><span data-sv>Börja om</span><span data-en>Start over</span></button>
+        </div>
+      </div>
+      <div class="quiz-result" id="qresult-insourcing">
+        <div class="quiz-badge">
+          <div class="quiz-badge-label" data-sv>Rekommendation</div><div class="quiz-badge-label" data-en>Recommendation</div>
+          <div class="quiz-badge-name" data-sv>Insourcing</div><div class="quiz-badge-name" data-en>Embedded Consultant</div>
+        </div>
+        <div class="quiz-explain">
+          <div class="quiz-explain-why">
+            <span data-sv>Ni vill behålla kontrollen men behöver mer kapacitet. Insourcingslösningen ger er en konsult som sätter sig in i ert team från dag ett — era verktyg, era möten, era mål. Ingen projektstruktur, ingen overhead.</span>
+            <span data-en>You want to stay in control but need more capacity. Our insourcing solution gives you a consultant who integrates from day one — your tools, your meetings, your goals. No project structure, no overhead.</span>
+          </div>
+          <button class="quiz-explain-cta" onclick="scrollToCard('insourcing')"><span data-sv>Läs mer om Insourcingslösning ↓</span><span data-en>Read more about Embedded Consultant ↓</span></button>
+          <button class="quiz-reset" onclick="quizReset()"><span data-sv>Börja om</span><span data-en>Start over</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░ PROOF ░ -->
+  <div class="section-label">
+    <span data-sv>Bevis</span><span data-en>Proof</span>
+  </div>
+  <div class="proof-wrap">
+    <section class="proof">
+      <div class="num">
+        <span data-sv>10x</span>
+        <span data-en>10x</span>
+        <small data-sv>färre felaktiga annonser</small>
+        <small data-en>fewer bad listings</small>
+      </div>
+      <div>
+        <p data-sv><strong>Foremarket</strong> är en marknadsplats för golfutrustning. Plattformen drunknade i inkonsistenta, lågkvalitativa annonser. Raincode driftsatte en AI-agent som betygsätter varje ny annons mot ett kvalitetsramverk, automatiskt avvisar de uppenbara fallen och flaggar gränsfall för mänsklig granskning. Teamet gick från reaktiv moderering till proaktiv kvalitetskontroll — på sex veckor.</p>
+        <p data-en><strong>Foremarket</strong> is a marketplace for golf equipment. The platform was drowning in inconsistent, low-quality listings. Raincode deployed an AI agent that scores every new listing against a quality rubric, auto-rejects the obvious failures, and flags borderline cases for human review. The team went from reactive moderation to proactive quality control — in six weeks.</p>
+      </div>
+    </section>
+
+    <!-- Mini cases -->
+    <div class="mini-cases">
+      <div class="mini-case">
+        <div class="mini-n">5×</div>
+        <div class="mini-body">
+          <p data-sv><strong>Viva Media — marknadsföringsbyrå.</strong> Raincode byggde agenter för SEM, SOME och dataanalys. Teamet på 5 levererar nu i samma takt som ett team på 15 — agenterna sköter rapportering, kanalanpassning och analyser automatiskt medan teamet fokuserar på strategi.</p>
+          <p data-en><strong>Viva Media — marketing agency.</strong> Raincode built agents for SEM, SOME, and data analytics. A team of 5 now delivers at the pace of a team of 15 — agents handle reporting, channel adaptation, and analysis automatically while the team focuses on strategy.</p>
+        </div>
+      </div>
+      <div class="mini-case">
+        <div class="mini-n">−4 d</div>
+        <div class="mini-body">
+          <p data-sv><strong>Finansteam — börsnoterat bolag.</strong> Månadsavslutet förkortades med 4 arbetsdagar. En AI-agent matchar transaktioner, flaggar avvikelser och skriver ett första utkast för varje kontoavstämning. Teamet granskar och godkänner — det initiala matchningsarbetet är borta.</p>
+          <p data-en><strong>Finance team — listed company.</strong> Month-end close shortened by 4 business days. An AI agent matches transactions, flags exceptions, and writes a first draft for each reconciliation. The team reviews and approves — the initial matching work is gone.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social proof bar -->
+    <div class="proof-cred">
+      <div class="stat">
+        <div class="n" data-sv data-count="20" data-suffix="+">20+</div>
+        <div class="n" data-en data-count="20" data-suffix="+">20+</div>
+        <div class="l" data-sv>Branscher</div>
+        <div class="l" data-en>Industries</div>
+      </div>
+      <div class="sep"></div>
+      <div class="stat">
+        <div class="n" data-sv>Indutrade</div>
+        <div class="n" data-en>Indutrade</div>
+        <div class="l" data-sv>Bland våra kunder</div>
+        <div class="l" data-en>Among our clients</div>
+      </div>
+      <div class="sep"></div>
+      <div class="stat">
+        <div class="n" data-sv>Scale-up</div>
+        <div class="n" data-en>Scale-up</div>
+        <div class="l" data-sv>till börsnoterad bank</div>
+        <div class="l" data-en>to publicly listed bank</div>
+      </div>
+      <div class="sep"></div>
+      <div class="stat" style="max-width:200px">
+        <div style="font-size:12px;color:#A9B0C0;line-height:1.5" data-sv>Se ett verkligt exempel på en Impact Scan vi genomfört.</div>
+        <div style="font-size:12px;color:#A9B0C0;line-height:1.5" data-en>See a real example of an Impact Scan we have delivered.</div>
+        <a href="https://app.pitch.com/app/presentation/a27015ef-0e10-4beb-9b85-bc4b40adfce2/72be4b75-67d8-40b8-8f4f-951c647614e5" target="_blank" rel="noopener" style="color:#6B87CC;font-size:12px;font-weight:700;text-decoration:none;margin-top:4px;display:inline-block" data-sv>Öppna referenscase &#8599;</a>
+        <a href="https://app.pitch.com/app/presentation/a27015ef-0e10-4beb-9b85-bc4b40adfce2/72be4b75-67d8-40b8-8f4f-951c647614e5" target="_blank" rel="noopener" style="color:#6B87CC;font-size:12px;font-weight:700;text-decoration:none;margin-top:4px;display:inline-block" data-en>Open reference case &#8599;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░ PHASES ░ -->
+  <div class="section-label">
+    <span data-sv>Så levererar vi</span><span data-en>How we deliver</span>
+  </div>
+  <div class="phases">
+    <div class="phase">
+      <div class="n">01</div>
+      <div class="name">ANALYSFAS</div>
+      <div class="desc" data-sv>Förstå verksamheten, datan och ramarna.</div>
+      <div class="desc" data-en>Understand the business, the data, the constraints.</div>
+    </div>
+    <div class="phase">
+      <div class="n">02</div>
+      <div class="name">DEFINERA &amp; GODKÄNN</div>
+      <div class="desc" data-sv>Definiera scope och framgångskriterier. Få godkännande.</div>
+      <div class="desc" data-en>Define scope and success criteria. Get sign-off.</div>
+    </div>
+    <div class="phase">
+      <div class="n">03</div>
+      <div class="name">PROTOTYP &amp; VALIDERING</div>
+      <div class="desc" data-sv>Bygg, testa, validera mot kriterierna.</div>
+      <div class="desc" data-en>Build, test, validate against the criteria.</div>
+    </div>
+    <div class="phase">
+      <div class="n">04</div>
+      <div class="name">SKALA &amp; INTEGRERA</div>
+      <div class="desc" data-sv>Driftsätt, integrera, lämna över med monitorering.</div>
+      <div class="desc" data-en>Deploy, integrate, hand off with monitoring.</div>
+    </div>
+  </div>
+
+  <!-- ░ COST OF INACTION ░ -->
+  <div class="cost-wrap">
+    <div class="section-label">
+      <span data-sv>Det vanligaste hindret</span>
+      <span data-en>The most common obstacle</span>
+    </div>
+    <div class="cost-banner">
+      <div class="cost-inner">
+        <h2 class="cost-headline">
+          <span data-sv>Intressant — men det finns alltid <mark>viktigare saker just nu.</mark></span>
+          <span data-en>Interesting — but there's always <mark>something more urgent right now.</mark></span>
+        </h2>
+        <p class="cost-body">
+          <span data-sv>Det är den vanligaste anledningen till att AI-initiativ stannar på idéstadiet. Inte brist på intresse, inte brist på budget — utan att det aldrig riktigt blir <strong>tillräckligt prioriterat</strong>. Och varje månad ni väntar fortsätter det manuella arbetet att kosta tid, och era konkurrenter fortsätter att bygga försprång.</span>
+          <span data-en>That's the most common reason AI initiatives stay at the idea stage. Not lack of interest, not lack of budget — just that it never quite gets <strong>prioritized enough</strong>. And every month you wait, manual work keeps costing time, and your competitors keep building a lead.</span>
+        </p>
+        <div class="cost-stats">
+          <div class="cost-stat">
+            <div class="cn" data-sv>6–18 mån</div>
+            <div class="cn" data-en>6–18 mo</div>
+            <div class="cl" data-sv>Hur länge de flesta bolag diskuterar AI internt innan de agerar — om de gör det.</div>
+            <div class="cl" data-en>How long most companies discuss AI internally before acting — if they ever do.</div>
+          </div>
+          <div class="cost-stat">
+            <div class="cn">30 min</div>
+            <div class="cl" data-sv>Vad ett samtal med oss kostar er. Ni behöver inte förbereda er, och vi ber er inte om ett åtagande.</div>
+            <div class="cl" data-en>What a call with us costs you. No prep needed, no commitment asked for.</div>
+          </div>
+          <div class="cost-stat">
+            <div class="cn" data-sv>2 v</div>
+            <div class="cn" data-en>2 wk</div>
+            <div class="cl" data-sv>Från beslut till uppstart, oavsett vilket alternativ ni väljer. Det tar kortare tid att starta än de flesta tror.</div>
+            <div class="cl" data-en>From decision to kickoff, regardless of which option you choose. It takes less time to start than most expect.</div>
+          </div>
+        </div>
+        <div class="cost-nudge">
+          <span data-sv>💡 <strong>Workshoppen kostar 30 000 kr och en halvdag.</strong> Det är troligen lägre kostnad — i tid och pengar — än ett internt strategimöte om AI som inte leder någonstans. Och ni lämnar med ett namngivet nästa steg som hela ledningsgruppen ställt sig bakom.</span>
+          <span data-en>💡 <strong>The workshop costs 30,000 kr and a half-day.</strong> That's likely less — in time and money — than an internal AI strategy meeting that leads nowhere. And you leave with a named next step that your entire leadership team has bought into.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░ NEXT STEPS ░ -->
+  <div class="steps-wrap">
+    <div class="section-label">
+      <span data-sv>Så startar vi</span>
+      <span data-en>How we get started</span>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-bg-n">1</div>
+        <div class="step-num" data-sv>STEG 01</div><div class="step-num" data-en>STEP 01</div>
+        <div class="step-name" data-sv>30 minuter — utan förberedelse</div>
+        <div class="step-name" data-en>30 minutes — no prep needed</div>
+        <div class="step-desc" data-sv>Vi ställer frågor om er verksamhet och era prioriteringar. Ni behöver inte ha svar på allt — det är poängen med samtalet.</div>
+        <div class="step-desc" data-en>We ask about your business and priorities. You don't need to have all the answers — that's the point of the call.</div>
+      </div>
+      <div class="step">
+        <div class="step-bg-n">2</div>
+        <div class="step-num" data-sv>STEG 02</div><div class="step-num" data-en>STEP 02</div>
+        <div class="step-name" data-sv>Vi rekommenderar en ingång</div>
+        <div class="step-name" data-en>We recommend a starting point</div>
+        <div class="step-desc" data-sv>Inom 48 timmar återkommer vi med en konkret rekommendation — vilket alternativ som passar er situation och varför. Ingen standardpitch, ingen generisk offert.</div>
+        <div class="step-desc" data-en>Within 48 hours we return with a concrete recommendation — which option fits your situation and why. No standard pitch, no generic quote.</div>
+      </div>
+      <div class="step">
+        <div class="step-bg-n">3</div>
+        <div class="step-num" data-sv>STEG 03</div><div class="step-num" data-en>STEP 03</div>
+        <div class="step-name" data-sv>Uppstart inom två veckor</div>
+        <div class="step-name" data-en>Kickoff within two weeks</div>
+        <div class="step-desc" data-sv>Oavsett vilket alternativ som passar kan vi starta inom två veckor från beslut. Ingen lång upphandling, ingen väntelista.</div>
+        <div class="step-desc" data-en>Regardless of which option fits, we can start within two weeks of a decision. No lengthy procurement, no waiting list.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░ CTA ░ -->
+  <section class="cta">
+    <div>
+      <h2 data-sv>Osäker på var ni ska börja? Det reder vi ut på 30 minuter — ingen förberedelse krävs.</h2>
+      <h2 data-en>Not sure which path fits? Let's figure it out together — 30 minutes, no prep needed.</h2>
+      <span class="contact" data-sv>Felix Wicksell · felix@raincode.tech</span>
+      <span class="contact" data-en>Felix Wicksell · felix@raincode.tech</span>
+    </div>
+    <a class="cta-btn" href="mailto:felix@raincode.tech">
+      <span data-sv>Boka ett samtal +</span>
+      <span data-en>Book a call +</span>
+    </a>
+  </section>
+
+  <footer>
+    <div>RAINCODE · <span data-sv>AI som levererar affärsresultat</span><span data-en>AI that delivers business outcomes</span></div>
+    <div>April 2026</div>
+  </footer>
+
+</div>
+
+<script>
+// ── Quiz functions (global scope for onclick) ──
+function quizGo(step){
+  document.querySelectorAll('#quiz .quiz-step,#quiz .quiz-result').forEach(function(el){el.classList.remove('active');});
+  var next = document.getElementById('qstep-'+step);
+  if(next) next.classList.add('active');
+}
+function quizResult(id){
+  document.querySelectorAll('#quiz .quiz-step,#quiz .quiz-result').forEach(function(el){el.classList.remove('active');});
+  var res = document.getElementById('qresult-'+id);
+  if(res) res.classList.add('active');
+  // Re-apply language so inner data-sv/data-en elements render correctly
+  var lang = document.documentElement.getAttribute('lang')||'sv';
+  document.querySelectorAll('[data-en],[data-sv]').forEach(function(el){
+    var match=(lang==='en'&&el.hasAttribute('data-en'))||(lang==='sv'&&el.hasAttribute('data-sv'));
+    var blockTags=['H1','H2','H3','H4','H5','H6','P','DIV','LI','SMALL'];
+    el.style.display=match?(blockTags.indexOf(el.tagName)!==-1?'block':'inline'):'none';
+  });
+}
+function quizReset(){
+  document.querySelectorAll('#quiz .quiz-step,#quiz .quiz-result').forEach(function(el){el.classList.remove('active');});
+  var first=document.getElementById('qstep-1');
+  if(first) first.classList.add('active');
+}
+function scrollToCard(id){
+  var card=document.querySelector('.pw[data-id="'+id+'"]');
+  if(card){
+    card.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(function(){card.setAttribute('aria-expanded','true');},700);
+  }
+}
+
+(function(){
+  // ── Scroll-based fade-in for cards ──
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  },{threshold:0.08});
+  var fadeTargets = document.querySelectorAll('.pw,.phase,.proof,.proof-cred,.cred-item,.quiz-wrap,.mini-case,.cost-banner,.step,.pos-card,.pos-example,.dim-card,.pos-closer,.at-card,.intro-role-inner');
+  fadeTargets.forEach(function(el,i){
+    el.style.opacity='0';
+    el.style.transform='translateY(16px)';
+    el.style.transition='opacity .45s cubic-bezier(.4,0,.2,1) '+(i*55)+'ms, transform .45s cubic-bezier(.4,0,.2,1) '+(i*55)+'ms';
+    observer.observe(el);
+  });
+
+  // ── Count-up for stat numbers ──
+  function countUp(el, target, suffix){
+    var start = 0, dur = 1200, step = 16;
+    var interval = setInterval(function(){
+      start += Math.ceil(target / (dur/step));
+      if(start >= target){ start = target; clearInterval(interval); }
+      el.textContent = start + suffix;
+    }, step);
+  }
+  var statObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var el = e.target;
+        var raw = el.getAttribute('data-count');
+        var suffix = el.getAttribute('data-suffix')||'';
+        if(raw) countUp(el, parseInt(raw), suffix);
+        statObserver.unobserve(el);
+      }
+    });
+  },{threshold:0.5});
+  document.querySelectorAll('[data-count]').forEach(function(el){ statObserver.observe(el); });
+
+  var html = document.documentElement;
+  var buttons = document.querySelectorAll('.langtoggle button');
+  var BLOCK_TAGS = ['H1','H2','H3','H4','H5','H6','P','DIV','LI','SMALL','SPAN','A'];
+  function nativeDisplay(el){
+    var block = ['H1','H2','H3','H4','H5','H6','P','DIV','LI','SMALL'];
+    return block.indexOf(el.tagName) !== -1 ? 'block' : 'inline';
+  }
+  function setLang(lang){
+    html.setAttribute('lang', lang);
+    document.querySelectorAll('[data-en],[data-sv]').forEach(function(el){
+      var match = (lang === 'en' && el.hasAttribute('data-en')) ||
+                  (lang === 'sv' && el.hasAttribute('data-sv'));
+      el.style.display = match ? nativeDisplay(el) : 'none';
+    });
+    buttons.forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+      b.setAttribute('aria-selected', b.dataset.lang === lang);
+    });
+  }
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.dataset.lang); });
+  });
+  setLang(html.getAttribute('lang') || 'sv');
+
+  // Pathway expand/collapse
+  document.querySelectorAll('.pw').forEach(function(card){
+    card.addEventListener('click', function(e){
+      // don't collapse if clicking a link inside the card
+      if(e.target.tagName === 'A') return;
+      var open = card.getAttribute('aria-expanded') === 'true';
+      card.setAttribute('aria-expanded', open ? 'false' : 'true');
+    });
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.click(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
